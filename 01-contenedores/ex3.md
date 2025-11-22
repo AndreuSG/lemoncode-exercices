@@ -61,7 +61,7 @@ docker run -d \
 
 ![frontend-run](./img/frontend-run.png)
 
-## Probamos a crear una nueva clase desde la api y verificar que se refleja en el frontend:
+## Probamos a crear una nueva clase desde la api y verificar que se refleja en el frontend (No uso client.http porque no quiero cargar todos los datos de golpe, en el último reto lo haremos):
 
 ```bash
 curl -d '{"name":"Contenedores IV","instructor":"Gisela Torres","startDate":"2025-11-03T19:00:00Z","endDate":"2025-11-03T21:00:00Z","duration":2,"level":"Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5000/api/classes

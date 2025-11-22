@@ -75,7 +75,7 @@ npm start
 
 ---
 
-### Probamos de insertar datos:
+### Probamos de insertar datos (No uso client.http porque no quiero cargar todos los datos de golpe, en el último reto lo haremos):
 
 ```bash
 curl -d '{"name":"Contenedores I","instructor":"Gisela Torres","startDate":"2025-10-17T18:00:00Z","endDate":"2025-10-17T20:00:00Z","duration":2,"level":"Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5000/api/classes
