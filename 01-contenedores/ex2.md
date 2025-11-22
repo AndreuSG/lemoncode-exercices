@@ -66,7 +66,9 @@ docker run -d \
   --name backend \
   --network lemoncode-network \
   -p 5000:5000 \
-  -e DATABASE_URL="mongodb://mongo-container:27017" \
+  -e HOST=0.0.0.0 \
+  -e PORT=5000 \
+  -e DATABASE_URL=mongodb://mongo-container:27017 \
   -e DATABASE_NAME=LemoncodeCourseDb \
   lemoncode-backend:1.0
 ```
@@ -78,3 +80,11 @@ docker run -d \
 ## Verificar que el backend se conecta correctamente a MongoDB con los logs del contenedor:
 
 ![backend-logs](./img/backend-logs.png)
+
+## Probar la API del backend:
+
+```bash
+curl -d '{"name":"Contenedores III","instructor":"Gisela Torres","startDate":"2025-10-27T19:00:00Z","endDate":"2025-10-27T21:00:00Z","duration":2,"level":"Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5000/api/classes
+```
+
+![backend-api-get](./img/backend-api-get.png)

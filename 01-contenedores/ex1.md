@@ -78,7 +78,7 @@ npm start
 ### Probamos de insertar datos:
 
 ```bash
-➜  ~ curl -d '{"name":"Contenedores I","instructor":"Gisela Torres","startDate":"2025-10-17T18:00:00Z","endDate":"2025-10-17T20:00:00Z","duration":2,"level":"Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5000/api/classes
+curl -d '{"name":"Contenedores I","instructor":"Gisela Torres","startDate":"2025-10-17T18:00:00Z","endDate":"2025-10-17T20:00:00Z","duration":2,"level":"Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5000/api/classes
 
 curl -d '{"name":"Contenedores II","instructor":"Gisela Torres","startDate":"2025-10-24T18:00:00Z","endDate":"2025-10-24T20:00:00Z","duration":2,"level":"Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5000/api/classes
 ```
