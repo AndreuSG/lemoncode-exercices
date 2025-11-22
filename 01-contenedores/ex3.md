@@ -53,7 +53,7 @@ docker run -d \
   lemoncode-frontend:1.0
 ```
 
-## Verificamos que el contenedor del frontend está corriendo correctamente (pone hace 14 horas porque voy hago la documentación al día siguiente):
+## Verificamos que el contenedor del frontend está corriendo correctamente (pone hace 14 horas porque hago la documentación al día siguiente):
 
 ![docker-ps-frontend](./img/docker-ps-frontend.png)
 
