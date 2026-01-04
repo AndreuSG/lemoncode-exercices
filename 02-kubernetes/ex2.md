@@ -9,6 +9,7 @@ kind: Namespace
 metadata:
   name: todo-app
 ```
+
 Ejecutamos el siguiente comando para crear el namespace:
 
 ```bash
@@ -20,6 +21,7 @@ Comprobamos que se ha creado correctamente:
 ```bash
 kubectl get ns
 ```
+
 ![check ns ex2](img/check-ns-ex2.png)
 
 ## PASO 2: Creamos storageclass
