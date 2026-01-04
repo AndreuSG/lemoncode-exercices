@@ -88,10 +88,10 @@ Para acceder a un LoadBalancer en Minikube se utiliza el comando:
 minikube service todo-app-lb -n todo-app
 ```
 
-![minikube-service](./img/minikube-service.png)
-
 Al ejecutar este comando, Minikube abre una nueva pestaña en el navegador con la URL correcta para acceder al servicio LoadBalancer.
+
+![ex1-minikube-service](./img/ex1-minikube-service.png)
 
 Ahora ya podemos ver la aplicación de lista de tareas funcionando.
 
-![todo-app](./img/todo-app.png)
+![todo-app](./img/ex1-todo-app.png)

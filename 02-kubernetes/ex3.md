@@ -273,3 +273,5 @@ echo "$(minikube ip) todo.local" | sudo tee -a /etc/hosts
 Abrimos nuestro navegador y accedemos a la URL `http://todo.local`.
 
 ![app ex3](img/app-ex3.png)
+
+![check api ex3](img/check-api-ex3.png)
