@@ -131,8 +131,9 @@ Guardamos y ejecutamos el job.
 
 ![jenkins-check-ex1-2](img/jenkins-check-ex1-2.png)
 
+Antes de nada, apagamos el contendeor y desplegamos el docker-compose de la primera clase de jenkins que tiene docker in docker configurado.
 
-Ahora modificamos el Jenkinsfile para añadir docker-in-docker y construir una imagen docker con la aplicación compilada:
+Ahora modificamos el Jenkinsfile para añadir docker-in-docker y construir una imagen docker con la aplicación compilada.
 
 ```groovy
 pipeline {
