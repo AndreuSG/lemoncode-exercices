@@ -162,3 +162,139 @@ Verificamos en la consola de AWS que la Subnet se ha creado correctamente:
 
 ![Subnet creada](img/subnet.png)
 
+Verificamos desde la terminal que la Subnet se ha creado correctamente utilizando AWS CLI:
+
+```bash
+terraform state show aws_subnet.public_subnet
+```
+Output recibido:
+
+```
+# aws_subnet.public_subnet:
+resource "aws_subnet" "public_subnet" {
+    arn                                            = "arn:aws:ec2:eu-west-3:875911184041:subnet/subnet-02ccd47cb3b018f09"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "eu-west-3c"
+    availability_zone_id                           = "euw3-az3"
+    cidr_block                                     = "10.0.1.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-02ccd47cb3b018f09"
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = true
+    outpost_arn                                    = null
+    owner_id                                       = "875911184041"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    region                                         = "eu-west-3"
+    tags                                           = {
+        "Name" = "pac-public-subnet"
+    }
+    tags_all                                       = {
+        "Name" = "pac-public-subnet"
+    }
+    vpc_id                                         = "vpc-0a4269ffa44bca0e2"
+}
+```
+
+## Verificación de la creación de la Route Table
+
+Verificamos en la consola de AWS que la Route Table se ha creado correctamente:
+
+![Route Table creada](img/route_table.png)
+
+Verificamos desde la terminal que la Route Table se ha creado correctamente utilizando AWS CLI:
+
+```bash
+terraform state show aws_route_table.public_rt
+```
+Output recibido:
+
+```
+# aws_route_table.public_rt:
+resource "aws_route_table" "public_rt" {
+    arn              = "arn:aws:ec2:eu-west-3:875911184041:route-table/rtb-09e9b5a5ec321d676"
+    id               = "rtb-09e9b5a5ec321d676"
+    owner_id         = "875911184041"
+    propagating_vgws = []
+    region           = "eu-west-3"
+    route            = []
+    tags             = {
+        "Name" = "pac-public-rt"
+    }
+    tags_all         = {
+        "Name" = "pac-public-rt"
+    }
+    vpc_id           = "vpc-0a4269ffa44bca0e2"
+}
+```
+
+## Verificación de la creación de la ruta hacia Internet
+
+Verificamos en la consola de AWS que la ruta hacia Internet se ha creado correctamente:
+
+![Ruta hacia Internet creada](img/route_internet.png)
+
+Verificamos desde la terminal que la ruta hacia Internet se ha creado correctamente utilizando AWS CLI:
+
+```bash
+terraform state show aws_route.internet_access
+```
+
+Output recibido:
+
+```
+# aws_route.internet_access:
+resource "aws_route" "internet_access" {
+    carrier_gateway_id          = null
+    core_network_arn            = null
+    destination_cidr_block      = "0.0.0.0/0"
+    destination_ipv6_cidr_block = null
+    destination_prefix_list_id  = null
+    egress_only_gateway_id      = null
+    gateway_id                  = "igw-0288d8e12ab62e536"
+    id                          = "r-rtb-09e9b5a5ec321d6761080289494"
+    instance_id                 = null
+    instance_owner_id           = null
+    local_gateway_id            = null
+    nat_gateway_id              = null
+    network_interface_id        = null
+    origin                      = "CreateRoute"
+    region                      = "eu-west-3"
+    route_table_id              = "rtb-09e9b5a5ec321d676"
+    state                       = "active"
+    transit_gateway_id          = null
+    vpc_endpoint_id             = null
+    vpc_peering_connection_id   = null
+}
+```
+
+## Verificación de la asociación de la Route Table con la Subnet
+
+Verificamos en la consola de AWS que la asociación de la Route Table con la Subnet se ha creado correctamente:
+
+![Asociación de la Route Table con la Subnet creada](img/route_table_association.png)
+
+Verificamos desde la terminal que la asociación de la Route Table con la Subnet se ha creado correctamente utilizando AWS CLI:
+
+```bash
+terraform state show aws_route_table_association.public_assoc
+```
+
+Output recibido:
+
+```
+# aws_route_table_association.public_assoc:
+resource "aws_route_table_association" "public_assoc" {
+    gateway_id     = null
+    id             = "rtbassoc-04c7ed937d5352d0d"
+    region         = "eu-west-3"
+    route_table_id = "rtb-09e9b5a5ec321d676"
+    subnet_id      = "subnet-02ccd47cb3b018f09"
+}
+```
