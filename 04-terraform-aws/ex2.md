@@ -2,9 +2,9 @@
 
 ## Creación de la Subnet
 
-El bloque CIDR `10.0.1.0/24` permite dividir la red de la VPC en una subred más pequeña.
+Aquí usamos el bloque CIDR `10.0.1.0/24` para sacar una subred dentro de la red principal de la VPC.
 
-El parámetro `map_public_ip_on_launch = true` permite que las instancias lanzadas dentro de esta subnet reciban automáticamente una **IP pública**.
+Además, con `map_public_ip_on_launch = true` conseguimos que cualquier instancia que lance en esta subnet tenga **IP pública** automáticamente.
 
 ```hcl
 resource "aws_subnet" "public_subnet" {
@@ -20,7 +20,7 @@ resource "aws_subnet" "public_subnet" {
 
 ## Creación de la Route Table
 
-Creamos una tabla de rutas para la VPC que hemos creado anteriormente.
+En este paso creo la tabla de rutas para la VPC que monté en el ejercicio anterior.
 
 ```hcl
 resource "aws_route_table" "public_rt" {
@@ -34,7 +34,7 @@ resource "aws_route_table" "public_rt" {
 
 ## Creación de la ruta hacia Internet
 
-Se define una ruta que redirige todo el tráfico (`0.0.0.0/0`) hacia el Internet Gateway.
+Aquí añado la ruta por defecto (`0.0.0.0/0`) para que todo el tráfico salga por el Internet Gateway.
 
 ```hcl
 resource "aws_route" "internet_access" {
@@ -46,7 +46,7 @@ resource "aws_route" "internet_access" {
 
 ## Asociación de la Route Table con la Subnet
 
-Para que la subnet utilice la tabla de rutas creada anteriormente, se debe asociar la tabla de rutas con la subnet.
+Para que esta subnet use esa tabla de rutas, la asocio directamente.
 
 ```hcl
 resource "aws_route_table_association" "public_assoc" {
@@ -57,7 +57,7 @@ resource "aws_route_table_association" "public_assoc" {
 
 ## Ejecución de Terraform
 
-Se ejecuta primero el plan para revisar los cambios que Terraform aplicará.
+Primero lanzo el `terraform plan` para revisar qué recursos se van a crear antes de aplicar nada.
 
 ```bash
 terraform plan
@@ -134,7 +134,7 @@ Output recibido:
 Plan: 4 to add, 0 to change, 0 to destroy.
 ```
 
-Posteriormente se aplican los cambios para crear los recursos en AWS.
+Cuando veo que el plan está bien, ejecuto el apply para crear los recursos en AWS.
 
 ```bash
 terraform apply
@@ -158,11 +158,11 @@ Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
 
 ## Verificación de la creación de la Subnet
 
-Verificamos en la consola de AWS que la Subnet se ha creado correctamente:
+Compruebo en la consola de AWS que la Subnet se ha creado correctamente:
 
 ![Subnet creada](img/subnet.png)
 
-Verificamos desde la terminal que la Subnet se ha creado correctamente utilizando AWS CLI:
+También lo verifico desde terminal con Terraform para asegurarme de que el estado coincide:
 
 ```bash
 terraform state show aws_subnet.public_subnet
@@ -204,11 +204,11 @@ resource "aws_subnet" "public_subnet" {
 
 ## Verificación de la creación de la Route Table
 
-Verificamos en la consola de AWS que la Route Table se ha creado correctamente:
+Compruebo en la consola de AWS que la Route Table se ha creado correctamente:
 
 ![Route Table creada](img/route_table.png)
 
-Verificamos desde la terminal que la Route Table se ha creado correctamente utilizando AWS CLI:
+También lo reviso desde terminal para confirmar que todo quedó bien:
 
 ```bash
 terraform state show aws_route_table.public_rt
@@ -236,11 +236,11 @@ resource "aws_route_table" "public_rt" {
 
 ## Verificación de la creación de la ruta hacia Internet
 
-Verificamos en la consola de AWS que la ruta hacia Internet se ha creado correctamente:
+Compruebo en la consola de AWS que la ruta hacia Internet se ha creado correctamente:
 
 ![Ruta hacia Internet creada](img/route_internet.png)
 
-Verificamos desde la terminal que la ruta hacia Internet se ha creado correctamente utilizando AWS CLI:
+Después lo verifico desde terminal para validar la ruta creada:
 
 ```bash
 terraform state show aws_route.internet_access
@@ -276,11 +276,11 @@ resource "aws_route" "internet_access" {
 
 ## Verificación de la asociación de la Route Table con la Subnet
 
-Verificamos en la consola de AWS que la asociación de la Route Table con la Subnet se ha creado correctamente:
+Compruebo en la consola de AWS que la asociación entre la Route Table y la Subnet se ha creado correctamente:
 
 ![Asociación de la Route Table con la Subnet creada](img/route_table_association.png)
 
-Verificamos desde la terminal que la asociación de la Route Table con la Subnet se ha creado correctamente utilizando AWS CLI:
+Y por último lo reviso desde terminal para confirmar la asociación:
 
 ```bash
 terraform state show aws_route_table_association.public_assoc

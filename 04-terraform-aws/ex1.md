@@ -16,7 +16,7 @@ Antes de comenzar preparé el entorno local para poder trabajar con Terraform y 
 
 ### Provider
 
-Se seleccionó la región **eu-west-3 (París)** por su proximidad geográfica con España.
+En mi caso elegí la región **eu-west-3 (París)** por su proximidad geográfica con España.
 
 ```hcl
 provider "aws" {
@@ -26,7 +26,7 @@ provider "aws" {
 
 ### Creación de la VPC
 
-Creamos una VPC con un bloque CIDR. Además, habilitamos los nombres de host DNS para facilitar la resolución de nombres dentro de la VPC. Agregamos un tag para identificar la VPC en la consola de AWS.
+Aquí creo una VPC con su bloque CIDR. También activo los nombres de host DNS para facilitar la resolución dentro de la VPC y le añado un tag para identificarla rápido en la consola de AWS.
 
 ```hcl
 resource "aws_vpc" "pac_vpc" {
@@ -41,7 +41,7 @@ resource "aws_vpc" "pac_vpc" {
 
 ### Internet Gateway
 
-Para permitir que los recursos dentro de la VPC tengan acceso a Internet se crea un Internet Gateway. El parámetro `vpc_id` asocia el Internet Gateway a la VPC creada previamente.
+Para que los recursos dentro de la VPC tengan salida a Internet, creo un Internet Gateway. Con `vpc_id` lo asocio a la VPC que acabo de crear.
 
 ```hcl
 resource "aws_internet_gateway" "igw" {
@@ -55,7 +55,7 @@ resource "aws_internet_gateway" "igw" {
 
 ### Ejecución de Terraform
 
-El siguiente paso es ejecutar el plan de Terraform para revisar los cambios que se aplicarán en AWS:
+El siguiente paso es lanzar el plan de Terraform para revisar exactamente qué cambios se van a aplicar en AWS:
 
 ```bash
 terraform plan
@@ -109,7 +109,7 @@ Output recibido:
 Plan: 2 to add, 0 to change, 0 to destroy.
 ```
 
-Vemos que se crearán los recursos que hemos definido. Para aplicar los cambios ejecutamos:
+Aquí veo que se van a crear los recursos que he definido. Cuando está todo correcto, aplico los cambios con:
 
 ```bash
 terraform apply
@@ -127,11 +127,11 @@ Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 
 ## Verificación de la creación de la VPC
 
-Verificamos en la consola de AWS que la VPC se ha creado correctamente:
+Compruebo en la consola de AWS que la VPC se ha creado correctamente:
 
 ![vpc](img/vpc.png)
 
-Verificamos desde la terminal que la VPC se ha creado correctamente utilizando AWS CLI:
+También lo verifico desde terminal con Terraform para asegurarme de que el estado coincide:
 
 ```bash
 terraform state show aws_vpc.pac_vpc
@@ -170,15 +170,15 @@ resource "aws_vpc" "pac_vpc" {
 }
 ```
 
-Vemos que la VPC se ha creado con el bloque CIDR correcto y con el tag que le asignamos.
+Con esto confirmo que la VPC se creó con el bloque CIDR correcto y con el tag que le asigné.
 
 ## Verificación de la creación del Internet Gateway
 
-Verificamos en la consola de AWS que la Internet Gateway se ha creado correctamente:
+Compruebo en la consola de AWS que el Internet Gateway se ha creado correctamente:
 
 ![igw](img/igw.png)
 
-Verificamos desde la terminal que el Internet Gateway se ha creado correctamente utilizando AWS CLI:
+Después lo reviso desde terminal para validar también el Internet Gateway:
 
 ```bash
 terraform state show aws_internet_gateway.igw
